@@ -1,16 +1,15 @@
-const CACHE_NAME = 'cache-1';
+// const CACHE_NAME = 'cache-1';
 self.addEventListener('install', evento => {
-    const cache = caches.open(CACHE_NAME).then(cache => {
+    const cache = caches.open('mi-cache-1').then(cache => {
         return cache.addAll([
+            './',
             'app.js',
             'index.html',
             'styles.css',
             'img/eliminar.svg',
-            'icons',
-            'manifest.json',
-            'sw.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
-            'https://fonts.googleapis.com/icon?family=Material+Icons'
+            'sw.js'
+            // 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
+            // 'https://fonts.googleapis.com/icon?family=Material+Icons'
         ])
     })
 

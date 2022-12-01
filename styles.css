@@ -1,0 +1,28 @@
+.collection li {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem;
+    color: #1976d2;
+    display: block;
+    width: 100%;
+    text-align: end;
+}
+
+.nota {
+    float: left;
+}
+
+.fecha {
+    color: #25a829;
+}
+
+.collection li img {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    float: right;
+    margin-left: 1rem;
+}
+
+.collection li:last-child {
+    border-bottom: none;
+}

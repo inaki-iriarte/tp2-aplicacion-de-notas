@@ -1,42 +1,33 @@
 const CACHE_NAME = 'cache-1';
-self.addEventListener('install', function(e){
+self.addEventListener('install', evento => {
     const cache = caches.open(CACHE_NAME).then(cache => {
         return cache.addAll([
+            '/',
             'app.js',
             'index.html',
             'styles.css',
-            'img/eliminar.svg'
+            'img/eliminar.svg',
+            'icons',
+            'manifest.json',
+            'sw.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
+            'https://fonts.googleapis.com/icon?family=Material+Icons'
         ])
     })
 
-    e.waitUntil(cache);
+    evento.waitUntil(cache);
 })
 
 self.addEventListener('fetch', e => {
-    // const respuestaCache = caches.match(e.request).then(res => {
-    //     if(res) {
-    //         return res;
-    //     } else {
-    //         return fetch(e.request).then(respuesta => {
-    //             caches.open(CACHE_NAME).then(cache => {
-    //                 cache.put(e.request, respuesta)
-    //             })
-
-    //             return respuesta.clone()
-    //         })
-    //     }
-    // })
-
-    // e.respondWith(respuestaCache);
-
-    const respuesta = fetch(e.request).then(respNet => {
-        return caches.open(CACHE_NAME).then(cache => {
-            cache.put(e.request, respNet.clone());
-            return respNet;
-        })
-    }).catch(error => {
-        return caches.match(e.request);
+    const respuestaCache = caches.match(e.request).then(res => {
+        if(res) {
+            return res;
+        } else {
+            return fetch(e.request).then(respuesta => {
+                return respuesta;
+            })
+        }
     })
 
-    e.respondWith(respuesta);
+    e.respondWith(respuestaCache);
 })

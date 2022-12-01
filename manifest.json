@@ -1,7 +1,7 @@
 {
     "name": "Mi aplicación para guardar notas",
     "short_name": "Mis notas",
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "display": "standalone",
     "description": "Aplicación que permite guardar notas",
     "theme_color": "#1976d2",

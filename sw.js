@@ -2,7 +2,6 @@ const CACHE_NAME = 'cache-1';
 self.addEventListener('install', evento => {
     const cache = caches.open(CACHE_NAME).then(cache => {
         return cache.addAll([
-            '/',
             'app.js',
             'index.html',
             'styles.css',

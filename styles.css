@@ -26,3 +26,7 @@
 .collection li:last-child {
     border-bottom: none;
 }
+
+#msg {
+    text-align: center;
+}

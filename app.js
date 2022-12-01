@@ -28,7 +28,7 @@ btnSave.addEventListener('click', ()=>{
     fecha: getFecha
   }
   lista.push(nota);
-  console.log(lista);
+  textArea.value = '';
 
   guardarNotas(lista);
 })
@@ -42,7 +42,6 @@ function guardarNotas(array){
   } else {
     localStorage.setItem('notas', listaString)
   }
-  console.log(localStorage.notas);
   renderizarNotas(array);
 }
 
@@ -82,7 +81,8 @@ function renderizarNotas(array){
     eliminarNotas();
   } else {
     let li = document.createElement('li');
-    li.innerHTML = 'Cree una nueva nota para que aparezca aquí.'
+    li.id = 'msg';
+    li.innerHTML = 'Cree una nueva nota para que aparezca aquí.';
     container.append(li);
   }
 }
@@ -91,17 +91,29 @@ function eliminarNotas(){
   btnsEliminar = []
   btnsEliminar = document.querySelectorAll('.eliminar');
 
-  btnsEliminar.forEach(button => {
-    button.addEventListener('click', (e) => {
-      let fecha = e.target.previousElementSibling.innerHTML;
-      for (let nota in lista) {
-        if (lista[nota].fecha === fecha) {
-          lista.splice(nota, 1);
-          console.log(lista);
+  if (btnsEliminar.length == 1) {
+    btnsEliminar.forEach(button => {
+      button.addEventListener('click', (e) => {
+        if (confirm('Se borrará esta nota. ¿Está seguro?')) {
+          lista = [];
+          container.innerHTML = '';
           guardarNotas(lista);
         }
-      }
-
-    })
-  });
+      })
+    });
+  } else {
+    btnsEliminar.forEach(button => {
+      button.addEventListener('click', (e) => {
+        if (confirm('Se borrará esta nota. ¿Está seguro?')) {
+          let fecha = e.target.previousElementSibling.innerHTML;
+          for (let nota in lista) {
+            if (lista[nota].fecha === fecha) {
+              lista.splice(nota, 1);
+              guardarNotas(lista);
+            }
+          }
+        }
+      })
+    });
+  }
 }
